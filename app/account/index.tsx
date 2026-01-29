@@ -1,21 +1,21 @@
-import { StyleSheet, Text, View } from "react-native";
+import { View } from "react-native";
+import { Text, useTheme } from "react-native-paper";
 
 export default function AccountScreen() {
+  const theme = useTheme();
+
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Account Overview</Text>
+    <View
+      style={{
+        flex: 1,
+        alignItems: "center",
+        justifyContent: "center",
+        backgroundColor: theme.colors.background,
+      }}
+    >
+      <Text variant="headlineMedium" style={{ fontWeight: "bold" }}>
+        Account Overview
+      </Text>
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: "bold",
-  },
-});

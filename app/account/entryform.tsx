@@ -1,15 +1,21 @@
-import { Text, View } from "react-native";
+import { View } from "react-native";
+import { Text, useTheme } from "react-native-paper";
 
-export default function Login() {
+export default function EntryFormScreen() {
+  const theme = useTheme();
+
   return (
     <View
       style={{
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
+        backgroundColor: theme.colors.background,
       }}
     >
-      <Text>Edit app/entryform.tsx to edit this screen.</Text>
+      <Text variant="bodyLarge">
+        Edit app/entryform.tsx to edit this screen.
+      </Text>
     </View>
   );
 }

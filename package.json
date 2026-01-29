@@ -9,12 +9,13 @@
     "ios": "expo run:ios",
     "web": "expo start --web",
     "proxy": "local-ssl-proxy --source 9001 --target 8081 --cert localhost.pem --key localhost-key.pem",
-    "web:https": "concurrently \"expo start --web\" \"npm run proxy\"",
+    "web:https": "concurrently \"expo start --web --port 8081\" \"npm run proxy\"",
     "lint": "expo lint"
   },
   "dependencies": {
     "@expo/vector-icons": "^15.0.3",
     "@react-navigation/bottom-tabs": "^7.4.0",
+    "@react-navigation/drawer": "^7.0.0",
     "@react-navigation/elements": "^2.6.3",
     "@react-navigation/native": "^7.1.8",
     "axios": "^1.13.4",
@@ -35,6 +36,7 @@
     "react-dom": "19.1.0",
     "react-native": "0.81.5",
     "react-native-auth0": "^5.4.0",
+    "react-native-drawer-layout": "^4.2.1",
     "react-native-gesture-handler": "~2.28.0",
     "react-native-paper": "^5.14.5",
     "react-native-reanimated": "~4.1.1",

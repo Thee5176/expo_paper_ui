@@ -15,7 +15,7 @@ export default ({ config }: ConfigContext): ExpoConfig => {
         "react-native-auth0",
         {
           domain: process.env.EXPO_PUBLIC_AUTH_DOMAIN,
-          customScheme: process.env.EXPO_PUBLIC_AUTH0_CUSTOM_SCHEME,
+          customScheme: process.env.EXPO_PUBLIC_AUTH_CUSTOM_SCHEME,
         },
       ],
     ],

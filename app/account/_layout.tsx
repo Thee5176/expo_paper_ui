@@ -1,37 +1,89 @@
-import { Tabs } from "expo-router";
+import { CustomDrawerContent } from "@/components/CustomDrawerContent";
+import { DrawerNavigationProp } from "@react-navigation/drawer";
+import { useRouter } from "expo-router";
+import { Drawer } from "expo-router/drawer";
 import React from "react";
+import { Platform } from "react-native";
+import { Appbar, useTheme } from "react-native-paper";
 
-export default function TabLayout() {
+// Custom header component for drawer
+function DrawerHeader({
+  navigation,
+  route,
+}: {
+  navigation: DrawerNavigationProp<any>;
+  route: any;
+}) {
+  const theme = useTheme();
+  const router = useRouter();
+
+  // Get title based on route name
+  const getTitle = (routeName: string) => {
+    switch (routeName) {
+      case "index":
+        return "Dashboard";
+      case "entryform":
+        return "Entry Form";
+      case "statement":
+        return "Statement";
+      case "report":
+        return "Report";
+      default:
+        return "Account";
+    }
+  };
+
   return (
-    <Tabs
+    <Appbar.Header style={{ backgroundColor: theme.colors.primary }}>
+      <Appbar.Action icon="menu" onPress={() => navigation.openDrawer()} />
+      <Appbar.Content title={getTitle(route.name)} />
+      <Appbar.Action icon="magnify" onPress={() => {}} />
+    </Appbar.Header>
+  );
+}
+
+export default function AccountLayout() {
+  const isWeb = Platform.OS === "web";
+
+  return (
+    <Drawer
+      drawerContent={(props: any) => <CustomDrawerContent />}
       screenOptions={{
-        headerShown: false,
+        drawerType: isWeb ? "permanent" : "slide",
+        drawerStyle: {
+          width: isWeb ? 280 : 240,
+        },
+        header: (props: any) => <DrawerHeader {...props} />,
       }}
     >
-      <Tabs.Screen
+      <Drawer.Screen
         name="index"
         options={{
-          title: "Account",
+          title: "Dashboard",
+          drawerLabel: "Dashboard",
         }}
       />
-      <Tabs.Screen
+      <Drawer.Screen
         name="entryform"
         options={{
           title: "Entry Form",
+          drawerLabel: "Entry Form",
         }}
       />
-      <Tabs.Screen
+      <Drawer.Screen
         name="statement"
         options={{
           title: "Statement",
+          drawerLabel: "Statement",
         }}
       />
-      <Tabs.Screen
+      <Drawer.Screen
         name="report"
         options={{
           title: "Report",
+          drawerLabel: "Report",
         }}
       />
-    </Tabs>
+    </Drawer>
   );
 }
