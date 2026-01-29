@@ -8,6 +8,8 @@
     "android": "expo run:android",
     "ios": "expo run:ios",
     "web": "expo start --web",
+    "proxy": "local-ssl-proxy --source 9001 --target 8081 --cert localhost.pem --key localhost-key.pem",
+    "web:https": "concurrently \"expo start --web\" \"npm run proxy\"",
     "lint": "expo lint"
   },
   "dependencies": {
@@ -44,8 +46,10 @@
   },
   "devDependencies": {
     "@types/react": "~19.1.0",
+    "concurrently": "^9.2.1",
     "eslint": "^9.25.0",
     "eslint-config-expo": "~10.0.0",
+    "local-ssl-proxy": "^2.0.5",
     "typescript": "~5.9.2"
   },
   "private": true
