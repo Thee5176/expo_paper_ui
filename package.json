@@ -8,8 +8,9 @@
     "android": "expo run:android",
     "ios": "expo run:ios",
     "web": "expo start --web",
-    "proxy": "local-ssl-proxy --source 9001 --target 8081 --cert localhost.pem --key localhost-key.pem",
-    "web:https": "concurrently \"expo start --web --port 8081\" \"npm run proxy\"",
+    "proxy": "local-ssl-proxy --source 8081 --target 9001 --cert localhost.pem --key localhost-key.pem",
+    "redirect": "node scripts/http-redirect.js",
+    "web:https": "concurrently \"expo start --web --port 9001\" \"npm run proxy\" \"npm run redirect\"",
     "lint": "expo lint"
   },
   "dependencies": {

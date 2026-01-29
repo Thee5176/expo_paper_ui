@@ -5,9 +5,7 @@ import {
   configureFonts,
 } from "react-native-paper";
 
-const fontConfig = {
-  fontFamily: "System",
-};
+import fontConfig from "./font";
 
 // Light theme
 const lightTheme: MD3Theme = {

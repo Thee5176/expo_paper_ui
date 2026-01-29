@@ -44,14 +44,19 @@ function DrawerHeader({
 
 export default function AccountLayout() {
   const isWeb = Platform.OS === "web";
+  const theme = useTheme();
 
   return (
     <Drawer
-      drawerContent={(props: any) => <CustomDrawerContent />}
+      drawerContent={(props: any) => <CustomDrawerContent {...props} />}
       screenOptions={{
         drawerType: isWeb ? "permanent" : "slide",
+        headerShown: !isWeb,
         drawerStyle: {
           width: isWeb ? 280 : 240,
+          backgroundColor: theme.colors.surface,
+          borderRightColor: theme.colors.outlineVariant,
+          borderRightWidth: isWeb ? 1 : 0,
         },
         header: (props: any) => <DrawerHeader {...props} />,
       }}

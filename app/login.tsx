@@ -48,7 +48,7 @@ export default function LoginScreen() {
           {user && (
             <View style={{ alignItems: "center", gap: 8 }}>
               <Text variant="bodyLarge">You are logged in as:</Text>
-              <Text variant="titleMedium" style={{ fontWeight: "bold" }}>
+              <Text variant="titleMedium" style={{ fontWeight: "normal" }}>
                 {user.name}
               </Text>
               <Text

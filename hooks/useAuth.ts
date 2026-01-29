@@ -1,14 +1,27 @@
-import { useAuth0 } from "react-native-auth0";
+import Constants, { ExecutionEnvironment } from "expo-constants";
+
+const isExpoGo =
+  Constants.executionEnvironment === ExecutionEnvironment.StoreClient;
 
 export const useAuth = () => {
+  // Safe hook call pattern for Expo Go
+  let auth0 = null;
+  if (!isExpoGo) {
+    try {
+      const { useAuth0 } = require("react-native-auth0");
+      auth0 = useAuth0();
+    } catch (e) {
+      console.warn("Failed to load react-native-auth0", e);
+    }
+  }
+
   const {
-    user,
-    isLoading,
-    authorize,
-    clearSession,
-    getCredentials,
-    hasValidCredentials,
-  } = useAuth0();
+    user = null,
+    isLoading = false,
+    authorize = async () => {},
+    clearSession = async () => {},
+    getCredentials = async () => null,
+  } = auth0 || {};
 
   const login = async () => {
     try {
@@ -43,6 +56,6 @@ export const useAuth = () => {
     login,
     logout,
     getAccessToken,
-    hasValidCredentials,
+    hasValidCredentials: !!user,
   };
 };

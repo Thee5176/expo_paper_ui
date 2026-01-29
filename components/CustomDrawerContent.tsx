@@ -1,15 +1,23 @@
 import { useAuth } from "@/hooks/useAuth";
+import {
+  DrawerContentComponentProps,
+  DrawerContentScrollView,
+} from "@react-navigation/drawer";
 import { usePathname, useRouter } from "expo-router";
-import { ScrollView, StyleSheet } from "react-native";
-import { Drawer } from "react-native-paper";
+import { Drawer, useTheme } from "react-native-paper";
 
-export function CustomDrawerContent() {
+export function CustomDrawerContent(props: DrawerContentComponentProps) {
   const router = useRouter();
   const pathname = usePathname();
   const { user, logout } = useAuth();
+  const theme = useTheme();
 
   return (
-    <ScrollView style={styles.container}>
+    <DrawerContentScrollView
+      {...props}
+      style={{ backgroundColor: theme.colors.surface }}
+      contentContainerStyle={{ paddingTop: 0 }}
+    >
       <Drawer.Section title="Account">
         <Drawer.Item
           label="Dashboard"
@@ -41,16 +49,10 @@ export function CustomDrawerContent() {
         <Drawer.Item
           label={user?.name || "Profile"}
           icon="account"
-          onPress={() => {}}
+          onPress={() => router.push("/login")}
         />
         <Drawer.Item label="Logout" icon="logout" onPress={logout} />
       </Drawer.Section>
-    </ScrollView>
+    </DrawerContentScrollView>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});
