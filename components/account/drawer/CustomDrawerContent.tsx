@@ -1,11 +1,11 @@
-import { useAuth } from "@/hooks/useAuth";
+import useAuth from "@/hooks/auth/useAuth";
 import {
-  DrawerContentComponentProps,
-  DrawerContentScrollView,
+    DrawerContentComponentProps,
+    DrawerContentScrollView,
 } from "@react-navigation/drawer";
 import { useRouter } from "expo-router";
-import { Drawer, useTheme } from "react-native-paper";
 import { ViewStyle } from "react-native";
+import { Drawer, useTheme } from "react-native-paper";
 
 export function CustomDrawerContent(props: DrawerContentComponentProps) {
   const router = useRouter();
@@ -31,8 +31,8 @@ export function CustomDrawerContent(props: DrawerContentComponentProps) {
             options.drawerLabel !== undefined
               ? options.drawerLabel
               : options.title !== undefined
-              ? options.title
-              : route.name;
+                ? options.title
+                : route.name;
 
           const isFocused = props.state.index === index;
 
@@ -42,7 +42,11 @@ export function CustomDrawerContent(props: DrawerContentComponentProps) {
               label={label as string}
               icon={({ size, color }) => {
                 if (options.drawerIcon) {
-                  return options.drawerIcon({ size, color, focused: isFocused });
+                  return options.drawerIcon({
+                    size,
+                    color,
+                    focused: isFocused,
+                  });
                 }
                 return null;
               }}
@@ -61,10 +65,10 @@ export function CustomDrawerContent(props: DrawerContentComponentProps) {
           onPress={() => router.push("/login")}
           theme={theme}
         />
-        <Drawer.Item 
-          label="Logout" 
-          icon="logout" 
-          onPress={logout} 
+        <Drawer.Item
+          label="Logout"
+          icon="logout"
+          onPress={logout}
           theme={theme}
         />
       </Drawer.Section>

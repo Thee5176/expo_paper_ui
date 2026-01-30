@@ -1,15 +1,14 @@
+import useAuth from "@/hooks/auth/useAuth";
 import type { AxiosError, AxiosResponse } from "axios";
 import React, { useEffect } from "react";
-import { useAuth0 } from "react-native-auth0";
 import { axiosCommandClient } from ".";
 
-//Config Command API Endpoint
 export function AxiosCommandClientProvider({
   children,
 }: {
   readonly children: React.ReactNode;
 }) {
-  const { user, isLoading, getCredentials } = useAuth0();
+  const { user, isLoading, getAccessToken } = useAuth();
 
   useEffect(() => {
     // We check for user existence as a proxy for isAuthenticated since existing codebase used it
@@ -19,7 +18,7 @@ export function AxiosCommandClientProvider({
       axiosCommandClient.interceptors.request.use(async (config) => {
         if (isAuthenticated && !isLoading) {
           try {
-            const credentials = await getCredentials();
+            const credentials = await getAccessToken();
             const token = credentials?.accessToken;
 
             if (token) {
@@ -73,7 +72,7 @@ export function AxiosCommandClientProvider({
         responseCommandInterceptor,
       );
     };
-  }, [user, isLoading, getCredentials]);
+  }, [user, isLoading, getAccessToken]);
 
   return children;
 }

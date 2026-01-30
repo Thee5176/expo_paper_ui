@@ -1,7 +1,7 @@
 import { useRouter } from "expo-router";
 import { useAuth0 } from "react-native-auth0";
 
-export const useAuth = () => {
+export default function useProvideAuth() {
   const router = useRouter();
   const { user, authorize, clearSession, isLoading, getCredentials } =
     useAuth0();
@@ -27,7 +27,7 @@ export const useAuth = () => {
   };
 
   const getAccessToken = async () => {
-    await getCredentials();
+    return await getCredentials();
   };
 
   return {
@@ -39,4 +39,4 @@ export const useAuth = () => {
     getAccessToken,
     hasValidCredentials: !!user,
   };
-};
+}

@@ -1,4 +1,5 @@
 import { ProtectedRoute } from "@/components/ProtectedRoute";
+import ProvideAuth from "@/hooks/auth/provider";
 import { AxiosCommandClientProvider } from "@/service/api/command";
 import { AxiosQueryClientProvider } from "@/service/api/query";
 import theme from "@/themes";
@@ -16,32 +17,34 @@ export default function RootLayout() {
   });
 
   const content = (
-    <AxiosCommandClientProvider>
-      <AxiosQueryClientProvider>
-        <ProtectedRoute>
-          <Stack>
-            <Stack.Screen
-              name="index"
-              options={{ title: "Home", headerShown: false }}
-            />
-            <Stack.Screen
-              name="login"
-              options={{
-                title: "Login",
-                presentation: "modal",
-                headerShown: false,
-              }}
-            />
-            <Stack.Screen name="account" options={{ headerShown: false }} />
-            <Stack.Screen name="modal" options={{ presentation: "modal" }} />
-            <Stack.Screen
-              name="+not-found"
-              options={{ title: "Page not Found" }}
-            />
-          </Stack>
-        </ProtectedRoute>
-      </AxiosQueryClientProvider>
-    </AxiosCommandClientProvider>
+    <ProvideAuth>
+      <AxiosCommandClientProvider>
+        <AxiosQueryClientProvider>
+          <ProtectedRoute>
+            <Stack>
+              <Stack.Screen
+                name="index"
+                options={{ title: "Home", headerShown: false }}
+              />
+              <Stack.Screen
+                name="login"
+                options={{
+                  title: "Login",
+                  presentation: "modal",
+                  headerShown: false,
+                }}
+              />
+              <Stack.Screen name="account" options={{ headerShown: false }} />
+              <Stack.Screen name="modal" options={{ presentation: "modal" }} />
+              <Stack.Screen
+                name="+not-found"
+                options={{ title: "Page not Found" }}
+              />
+            </Stack>
+          </ProtectedRoute>
+        </AxiosQueryClientProvider>
+      </AxiosCommandClientProvider>
+    </ProvideAuth>
   );
 
   return (

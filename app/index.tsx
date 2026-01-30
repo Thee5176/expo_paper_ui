@@ -1,10 +1,10 @@
-import { useAuth } from "@/hooks/useAuth";
+import useAuth from "@/hooks/auth/useAuth";
 import { useRouter } from "expo-router";
 import { useEffect } from "react";
 import { View } from "react-native";
 import { ActivityIndicator, useTheme } from "react-native-paper";
 
-export default function Home() {
+export default function Redirect() {
   const { user, isLoading } = useAuth();
   const router = useRouter();
   const theme = useTheme();

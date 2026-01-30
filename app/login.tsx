@@ -1,4 +1,4 @@
-import { useAuth } from "@/hooks/useAuth";
+import useAuth from "@/hooks/auth/useAuth";
 import { View } from "react-native";
 import { Button, Card, Text, useTheme } from "react-native-paper";
 

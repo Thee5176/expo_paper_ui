@@ -1,8 +1,8 @@
 import { useRouter, useSegments } from "expo-router";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { View } from "react-native";
 import { ActivityIndicator } from "react-native-paper";
-import { useAuth } from "../hooks/useAuth";
+import useAuth from "../hooks/auth/useAuth";
 import theme from "../themes";
 
 interface ProtectedRouteProps {
@@ -13,6 +13,27 @@ export function ProtectedRoute({ children }: ProtectedRouteProps) {
   const { isAuthenticated, isLoading } = useAuth();
   const segments = useSegments();
   const router = useRouter();
+  const [hasTimedOut, setHasTimedOut] = useState(false);
+
+  // Timeout fallback for stuck isLoading state (web platform issue with react-native-auth0)
+  useEffect(() => {
+    if (!isLoading) {
+      setHasTimedOut(false);
+      return;
+    }
+
+    const timer = setTimeout(() => {
+      if (isLoading) {
+        console.warn(
+          "[ProtectedRoute] Auth loading timeout (3s) - proceeding anyway. " +
+            "This is expected on web platform where Auth0 isLoading may not resolve.",
+        );
+        setHasTimedOut(true);
+      }
+    }, 3000); // 3 second timeout
+
+    return () => clearTimeout(timer);
+  }, [isLoading]);
 
   useEffect(() => {
     if (isLoading) return;
@@ -33,8 +54,8 @@ export function ProtectedRoute({ children }: ProtectedRouteProps) {
     }
   }, [isAuthenticated, segments, isLoading, router]);
 
-  // Show loading spinner while checking authentication
-  if (isLoading) {
+  // Show loading spinner while checking authentication (with timeout fallback)
+  if (isLoading && !hasTimedOut) {
     return (
       <View
         style={{
