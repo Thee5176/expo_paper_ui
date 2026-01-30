@@ -1,21 +1,5 @@
-import { View } from "react-native";
-import { Text, useTheme } from "react-native-paper";
+import DashboardScreen from "@/components/account/screens/DashboardScreen";
 
 export default function AccountScreen() {
-  const theme = useTheme();
-
-  return (
-    <View
-      style={{
-        flex: 1,
-        alignItems: "center",
-        justifyContent: "center",
-        backgroundColor: theme.colors.background,
-      }}
-    >
-      <Text variant="headlineMedium" style={{ fontWeight: "bold" }}>
-        Account Overview
-      </Text>
-    </View>
-  );
+  return <DashboardScreen />;
 }

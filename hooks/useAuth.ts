@@ -1,52 +1,33 @@
-import Constants, { ExecutionEnvironment } from "expo-constants";
-
-const isExpoGo =
-  Constants.executionEnvironment === ExecutionEnvironment.StoreClient;
+import { useRouter } from "expo-router";
+import { useAuth0 } from "react-native-auth0";
 
 export const useAuth = () => {
-  // Safe hook call pattern for Expo Go
-  let auth0 = null;
-  if (!isExpoGo) {
-    try {
-      const { useAuth0 } = require("react-native-auth0");
-      auth0 = useAuth0();
-    } catch (e) {
-      console.warn("Failed to load react-native-auth0", e);
-    }
-  }
-
-  const {
-    user = null,
-    isLoading = false,
-    authorize = async () => {},
-    clearSession = async () => {},
-    getCredentials = async () => null,
-  } = auth0 || {};
+  const router = useRouter();
+  const { user, authorize, clearSession, isLoading, getCredentials } =
+    useAuth0();
 
   const login = async () => {
     try {
-      await authorize();
+      await authorize({
+        scope: "openid profile email user",
+      });
+      router.replace("/account");
     } catch (e) {
-      console.log("Login cancelled or failed", e);
+      console.error("Login error:", e);
     }
   };
 
   const logout = async () => {
     try {
       await clearSession();
+      router.replace("/login");
     } catch (e) {
-      console.log("Logout cancelled or failed", e);
+      console.error("Logout error:", e);
     }
   };
 
   const getAccessToken = async () => {
-    try {
-      const credentials = await getCredentials();
-      return credentials?.accessToken;
-    } catch (e) {
-      console.error(e);
-      return null;
-    }
+    await getCredentials();
   };
 
   return {

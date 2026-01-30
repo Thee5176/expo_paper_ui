@@ -1,6 +1,6 @@
+import { useAuth } from "@/hooks/useAuth";
 import { View } from "react-native";
 import { Button, Card, Text, useTheme } from "react-native-paper";
-import { useAuth } from "../hooks/useAuth";
 
 export default function LoginScreen() {
   const { login, logout, user, isLoading, getAccessToken } = useAuth();
@@ -38,27 +38,9 @@ export default function LoginScreen() {
     >
       <Card style={{ width: "100%", maxWidth: 400 }}>
         <Card.Content style={{ alignItems: "center", gap: 20 }}>
-          <Text
-            variant="headlineMedium"
-            style={{ color: theme.colors.primary }}
-          >
+          <Text variant="headlineMedium" style={{ textAlign: "center" }}>
             Log in via SSO service
           </Text>
-
-          {user && (
-            <View style={{ alignItems: "center", gap: 8 }}>
-              <Text variant="bodyLarge">You are logged in as:</Text>
-              <Text variant="titleMedium" style={{ fontWeight: "normal" }}>
-                {user.name}
-              </Text>
-              <Text
-                variant="bodySmall"
-                style={{ color: theme.colors.secondary }}
-              >
-                {user.email}
-              </Text>
-            </View>
-          )}
 
           {!user && (
             <Text variant="bodyMedium" style={{ textAlign: "center" }}>

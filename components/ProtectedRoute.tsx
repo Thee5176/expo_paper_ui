@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { View } from "react-native";
 import { ActivityIndicator } from "react-native-paper";
 import { useAuth } from "../hooks/useAuth";
-import theme from "../theme";
+import theme from "../themes";
 
 interface ProtectedRouteProps {
   children: React.ReactNode;
