@@ -2,7 +2,6 @@ import ProvideBalance from "@/hooks/balance/provider";
 import { useFormSubmission } from "@/hooks/form/FormSubmissionContext";
 import useStepper from "@/hooks/stepper/useStepper";
 import { StyleSheet, View } from "react-native";
-import { useTheme } from "react-native-paper";
 import BalanceReview from "./BalanceReview";
 import EntryForm from "./EntryForm";
 import FormModal from "./FormModal";
@@ -12,11 +11,8 @@ import FormModal from "./FormModal";
  * Shows progress bar, form steps, and success modal
  */
 export default function MultiStepFormContent() {
-  const theme = useTheme();
-  const { activeStep, total } = useStepper();
+  const { activeStep } = useStepper();
   const { modalOpen, handleModalClose } = useFormSubmission();
-
-  const progress = (activeStep + 1) / total;
 
   const renderStep = () => {
     switch (activeStep) {

@@ -53,6 +53,7 @@ export default function RootLayout() {
         <Auth0Provider
           domain={process.env.EXPO_PUBLIC_AUTH_DOMAIN ?? ""}
           clientId={process.env.EXPO_PUBLIC_AUTH_CLIENT_ID ?? ""}
+          customScheme={process.env.EXPO_PUBLIC_AUTH_CUSTOM_SCHEME ?? ""}
         >
           {content}
         </Auth0Provider>

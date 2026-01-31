@@ -12,8 +12,8 @@ export default function LoginScreen() {
       const token = await getAccessToken();
       console.log("Logged in:", user);
       console.log("Access Token:", token);
-    } catch (e) {
-      console.log(e);
+    } catch {
+      console.log("error");
     }
   };
 
@@ -21,7 +21,7 @@ export default function LoginScreen() {
     try {
       await logout();
       console.log("Logged out");
-    } catch (e) {
+    } catch {
       console.log("Log out cancelled");
     }
   };

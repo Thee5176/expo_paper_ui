@@ -1,6 +1,5 @@
 import { DrawerNavigationProp } from "@react-navigation/drawer";
-import { useTheme } from "react-native-paper";
-import { Appbar } from "react-native-paper";
+import { Appbar, useTheme } from "react-native-paper";
 
 export function DrawerHeader({
   navigation,

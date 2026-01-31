@@ -15,15 +15,6 @@ export default function BalanceReview() {
   const formData = watch();
   const { date, description, ledgerItems } = formData;
 
-  // Calculate totals
-  const debitTotal = ledgerItems
-    .filter((item) => item.balanceType === "Debit")
-    .reduce((sum, item) => sum + (item.amount || 0), 0);
-
-  const creditTotal = ledgerItems
-    .filter((item) => item.balanceType === "Credit")
-    .reduce((sum, item) => sum + (item.amount || 0), 0);
-
   return (
     <ScrollView style={styles.container}>
       <Card style={styles.card}>

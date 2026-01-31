@@ -27,7 +27,7 @@ export default function EntryForm() {
     <View style={styles.container}>
       <Card style={styles.card}>
         <Card.Content>
-          <Text variant="headlineSmall" style={styles.title}>
+          <Text variant="headlineLarge" style={styles.title}>
             Entry Form
           </Text>
 
@@ -62,6 +62,7 @@ const styles = StyleSheet.create({
   },
   title: {
     marginBottom: 16,
+    alignSelf: "center",
   },
   fields: {
     gap: 12,
