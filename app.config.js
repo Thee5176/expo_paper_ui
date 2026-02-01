@@ -4,6 +4,7 @@ module.exports = ({ config }) => {
   return {
     ...config,
     extra: {
+      ...(config.extra || {}),
       AUTH_DOMAIN: process.env.AUTH_DOMAIN,
       AUTH_CLIENT_ID: process.env.AUTH_CLIENT_ID,
       AUTH_CUSTOM_SCHEME: process.env.AUTH_CUSTOM_SCHEME,

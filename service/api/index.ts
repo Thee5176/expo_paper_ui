@@ -4,6 +4,12 @@ import axios from "axios";
 const host = process.env.EXPO_PUBLIC_API_URL;
 console.log("API Host IP (env):", host);
 
+if (!host) {
+  throw new Error(
+    "EXPO_PUBLIC_API_URL is not defined in environment variables. Please check your .env file.",
+  );
+}
+
 const COMMAND_PATH: string = `${host}/command/`;
 const QUERY_PATH: string = `${host}/query/`;
 

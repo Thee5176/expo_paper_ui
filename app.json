@@ -53,11 +53,7 @@
       "router": {},
       "eas": {
         "projectId": "e62f13ec-3212-4818-b8ac-3462f749ede6"
-      },
-      "AUTH_DOMAIN": "choudai-matketplace.jp.auth0.com",
-      "AUTH_CUSTOM_SCHEME": "nativeexpopaper",
-      "AUTH_CLIENT_ID": "Cr2nvNOxZMm8hG0tdincPBhCQzbCPZi8",
-      "API_URL": "https://accounting-cqrs-project-381492877.ap-northeast-1.elb.amazonaws.com"
+      }
     }
   }
 }

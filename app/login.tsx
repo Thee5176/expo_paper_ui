@@ -3,15 +3,15 @@ import { View } from "react-native";
 import { Button, Card, Text, useTheme } from "react-native-paper";
 
 export default function LoginScreen() {
-  const { login, logout, user, isLoading, getAccessToken } = useAuth();
+  const { login, logout, user, isLoading } = useAuth();
   const theme = useTheme();
 
   const onLogin = async () => {
     try {
       await login();
-      const token = await getAccessToken();
-      console.log("Logged in:", user);
-      console.log("Access Token:", token);
+      if (__DEV__) {
+        console.log("Logged in:", user);
+      }
     } catch {
       console.log("error");
     }
