@@ -1,3 +1,4 @@
+import Constants from "expo-constants";
 import { useRouter } from "expo-router";
 import { useAuth0 } from "react-native-auth0";
 
@@ -8,9 +9,16 @@ export default function useProvideAuth() {
 
   const login = async () => {
     try {
-      await authorize({
-        scope: "openid profile email user",
-      });
+      await authorize(
+        {
+          scope: "openid profile email user",
+        },
+        {
+          customScheme:
+            Constants.expoConfig?.extra?.AUTH_CUSTOM_SCHEME ??
+            "nativeexpopaper",
+        },
+      );
       router.replace("/account");
     } catch (e) {
       console.error("Login error:", e);
@@ -19,7 +27,14 @@ export default function useProvideAuth() {
 
   const logout = async () => {
     try {
-      await clearSession();
+      await clearSession(
+        {},
+        {
+          customScheme:
+            Constants.expoConfig?.extra?.AUTH_CUSTOM_SCHEME ??
+            "nativeexpopaper",
+        },
+      );
       router.replace("/login");
     } catch (e) {
       console.error("Logout error:", e);

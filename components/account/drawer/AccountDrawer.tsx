@@ -1,10 +1,9 @@
 import { MaterialIcons } from "@expo/vector-icons";
+import Drawer from "expo-router/drawer";
 import React from "react";
 import { useTheme } from "react-native-paper";
 import { CustomDrawerContent } from "./CustomDrawerContent";
-import Drawer from "expo-router/drawer";
 import { DrawerHeader } from "./DrawerHeader";
-
 
 export default function AccountDrawer() {
   const theme = useTheme();
@@ -28,7 +27,7 @@ export default function AccountDrawer() {
         options={{
           title: "Dashboard",
           drawerLabel: "Dashboard",
-          drawerIcon: ({ color, size }) => (
+          drawerIcon: ({ color, size }: { color: string; size: number }) => (
             <MaterialIcons name="dashboard" size={size} color={color} />
           ),
         }}
@@ -38,7 +37,7 @@ export default function AccountDrawer() {
         options={{
           title: "Entry Form",
           drawerLabel: "Entry Form",
-          drawerIcon: ({ color, size }) => (
+          drawerIcon: ({ color, size }: { color: string; size: number }) => (
             <MaterialIcons name="edit-document" size={size} color={color} />
           ),
         }}
@@ -48,7 +47,7 @@ export default function AccountDrawer() {
         options={{
           title: "Statement",
           drawerLabel: "Statement",
-          drawerIcon: ({ color, size }) => (
+          drawerIcon: ({ color, size }: { color: string; size: number }) => (
             <MaterialIcons name="table-view" size={size} color={color} />
           ),
         }}
@@ -58,8 +57,18 @@ export default function AccountDrawer() {
         options={{
           title: "Report",
           drawerLabel: "Report",
-          drawerIcon: ({ color, size }) => (
+          drawerIcon: ({ color, size }: { color: string; size: number }) => (
             <MaterialIcons name="bar-chart" size={size} color={color} />
+          ),
+        }}
+      />
+      <Drawer.Screen
+        name="profile"
+        options={{
+          title: "Profile",
+          drawerLabel: "Profile",
+          drawerIcon: ({ color, size }: { color: string; size: number }) => (
+            <MaterialIcons name="account-circle" size={size} color={color} />
           ),
         }}
       />

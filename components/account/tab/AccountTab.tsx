@@ -1,5 +1,6 @@
 import DashboardScreen from "@/components/account/screens/DashboardScreen";
 import EntryFormScreen from "@/components/account/screens/EntryFormScreen";
+import ProfileScreen from "@/components/account/screens/ProfileScreen";
 import ReportScreen from "@/components/account/screens/ReportScreen";
 import StatementScreen from "@/components/account/screens/StatementScreen";
 import React, { useState } from "react";
@@ -32,6 +33,12 @@ export default function AccountTabs() {
       focusedIcon: "chart-bar",
       unfocusedIcon: "chart-bar",
     },
+    {
+      key: "profile",
+      title: "Profile",
+      focusedIcon: "account",
+      unfocusedIcon: "account-outline",
+    },
   ]);
 
   const renderScene = BottomNavigation.SceneMap({
@@ -39,6 +46,7 @@ export default function AccountTabs() {
     entry: EntryFormScreen,
     statement: StatementScreen,
     report: ReportScreen,
+    profile: ProfileScreen,
   });
 
   return (

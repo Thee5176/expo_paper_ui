@@ -6,11 +6,12 @@
     "start": "expo start",
     "reset-project": "node ./scripts/reset-project.js",
     "android": "expo run:android",
+    "android:dev": "expo run:android --port 9001",
     "ios": "expo run:ios",
     "web": "expo start --web",
     "proxy": "local-ssl-proxy --source 8081 --target 9001 --cert localhost.pem --key localhost-key.pem",
     "redirect": "node scripts/http-redirect.js",
-    "web:https": "concurrently \"expo start --web --port 9001\" \"npm run proxy\" \"npm run redirect\"",
+    "web:https": "BROWSER=none concurrently \"expo start --web --port 9001\" \"npm run proxy\" \"npm run redirect\" \"sleep 3 && npx open-cli https://localhost:8081\"",
     "lint": "expo lint"
   },
   "dependencies": {
@@ -52,6 +53,7 @@
     "react-native-worklets": "0.5.1"
   },
   "devDependencies": {
+    "@types/hammerjs": "^2.0.46",
     "@types/react": "~19.1.0",
     "concurrently": "^9.2.1",
     "eslint": "^9.25.0",

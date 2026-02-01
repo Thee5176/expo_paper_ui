@@ -1,18 +1,18 @@
 import MultiStepForm from "@/components/ledger_form/MultiStepForm";
-import { View } from "react-native";
 import { useTheme } from "react-native-paper";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function EntryFormScreen() {
   const theme = useTheme();
 
   return (
-    <View
+    <SafeAreaView
       style={{
         flex: 1,
         backgroundColor: theme.colors.background,
       }}
     >
       <MultiStepForm />
-    </View>
+    </SafeAreaView>
   );
 }

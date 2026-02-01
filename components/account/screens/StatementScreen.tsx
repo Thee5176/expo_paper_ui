@@ -1,11 +1,11 @@
-import { View } from "react-native";
 import { Text, useTheme } from "react-native-paper";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function StatementScreen() {
   const theme = useTheme();
 
   return (
-    <View
+    <SafeAreaView
       style={{
         flex: 1,
         justifyContent: "center",
@@ -16,6 +16,6 @@ export default function StatementScreen() {
       <Text variant="bodyLarge">
         Edit app/statement.tsx to edit this screen.
       </Text>
-    </View>
+    </SafeAreaView>
   );
 }

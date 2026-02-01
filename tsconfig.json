@@ -3,10 +3,10 @@
   "compilerOptions": {
     "strict": true,
     "paths": {
-      "@/*": [
-        "./*"
-      ]
-    }
+      "@/*": ["./*"]
+    },
+    "skipLibCheck": true,
+    "types": ["node", "react", "hammerjs"]
   },
   "include": [
     "**/*.ts",

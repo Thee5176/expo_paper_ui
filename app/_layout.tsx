@@ -7,6 +7,7 @@ import { Stack } from "expo-router";
 import { Auth0Provider } from "react-native-auth0";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { PaperProvider } from "react-native-paper";
+import { SafeAreaProvider } from "react-native-safe-area-context";
 
 export default function RootLayout() {
   console.log("Env vars:", {
@@ -53,9 +54,8 @@ export default function RootLayout() {
         <Auth0Provider
           domain={process.env.EXPO_PUBLIC_AUTH_DOMAIN ?? ""}
           clientId={process.env.EXPO_PUBLIC_AUTH_CLIENT_ID ?? ""}
-          customScheme={process.env.EXPO_PUBLIC_AUTH_CUSTOM_SCHEME ?? ""}
         >
-          {content}
+          <SafeAreaProvider>{content}</SafeAreaProvider>
         </Auth0Provider>
       </PaperProvider>
     </GestureHandlerRootView>
