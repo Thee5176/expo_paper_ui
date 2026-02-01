@@ -41,23 +41,23 @@ export const deleteLedgerEntry = async (uuid: string) => {
 export const onSubmit: SubmitHandler<LedgerEntry> = async (
   data: LedgerEntry,
 ) => {
-  // Add timestamp to the data
-  data.timestamp = new Date().toISOString();
+  const payload: LedgerEntry = {
+    ...data,
+    timestamp: new Date().toISOString(),
+    ledgerItems: data.ledgerItems
+      .filter((item) => item != null)
+      .map((item, idx) => ({
+        ...item,
+        id: idx + 1,
+        coa: Number(item.coa),
+      })),
+  };
 
-  // Adjust null and fix ledgeritem order
-  data.ledgerItems = data.ledgerItems
-    .filter((item) => item != null)
-    .map((item, idx) => ({
-      ...item,
-      id: idx + 1,
-      coa: Number(item.coa),
-    }));
-
-  if (data.id) {
-    const result = await updateLedgerEntry(data);
+  if (payload.id) {
+    const result = await updateLedgerEntry(payload);
     console.log("Update result:", result);
   } else {
-    const result = await sendLedgerEntry(data);
+    const result = await sendLedgerEntry(payload);
     console.log("Create result:", result);
   }
 };
